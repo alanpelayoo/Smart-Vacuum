@@ -1,16 +1,18 @@
-// PID Controller for motor APZ
+// PID Controller for motor APZ=
 
-const   int T = 10;                     // Sampling period (ms)   
+const int T = 10;                     // Sampling period (ms)   
 volatile int encoderPos = 0;
 int counter[2] = {0,0};     // Counter vector
 float rpm = 0;
 int pulsos_dif =0;
-unsigned long timeold;
+
+unsigned long previousMillis = 0;
+
 
 
 
 //PID
-int setpoint = 100;        // Reference variable
+int setpoint = 80;        // Reference variable
 int u;
 float uk;
 float u1;
@@ -19,9 +21,9 @@ int e1;
 int e2;
 
 
-const   float Kp = .3;                 // Proportional gain
+const   float Kp = .5;                 // Proportional gain
 const   int Ti = 10;                  // Integral time
-const   int Td = 10;                 // Derivative time
+const   int Td = 0;                 // Derivative time
 
 #define ENCODER_A       2 // Amarillo
 #define ENCODER_B       4 // Verde
@@ -36,16 +38,20 @@ void setup(){
 }
 
 void loop(){
-  speedCalculation();
-  pid();
-  u = 0;
-  while (u < uk){ 
-    u += 1; 
+  unsigned long currentMillis = millis();
+  if ((currentMillis - previousMillis) >= T)
+  {
+    previousMillis = currentMillis;
+    speedCalculation();
+    pid();
+    u = 0;
+    while (u < uk){ 
+      u += 1; 
+    }
+    analogWrite(enableA, u);
+    Serial.println(rpm); 
   }
-  analogWrite(enableA, u);
-  Serial.println(rpm);   
-  delay(T);
-  
+    
 }
 
 
