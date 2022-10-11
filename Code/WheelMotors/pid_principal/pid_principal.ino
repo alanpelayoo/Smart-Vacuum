@@ -54,13 +54,18 @@ void loop() {
     analogWrite(PWM_salida, cv*(255.0/500.0));
     
   }
+  
   if (( currentMillis - previousMillis2) >= interval2)
   {
+  
     if (contador2 >20){
       sp = 120;
     }
     if (contador2 > 50){
       sp = 60;
+    }
+    if (contador2 > 70){
+      sp = 130;
     }
     previousMillis2 = currentMillis;
     Serial.print("SP: ");
