@@ -23,7 +23,7 @@ void setup(){
   //Configurar Interrupción
   timeold = 0;
   attachInterrupt(digitalPinToInterrupt(ENCODER_A),leerEncoder,RISING);
-  analogWrite(enableA, 255);
+  analogWrite(enableA, 125);
   
 }
 
