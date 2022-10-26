@@ -5,8 +5,8 @@
 
 
 
-bool turning_r;
-float sp= 100;
+
+float sp= 120;
 
 volatile int contador = 0;
          int contador2 = 0;
@@ -14,19 +14,21 @@ volatile int contador = 0;
 unsigned long previousMillis = 0;
 unsigned long previousMillis2 = 0;
 long interval = 100;
-long interval2 = 500;
+long interval2 = 1000;
 
-#include <NewPing.h>
+bool flag_pid = true;
 
-const int EchoPin = 13;
-const int TriggerPin = 12;
+NewPing usensorC(TriggerPinC, EchoPinC , 30);
+NewPing usensorL(TriggerPinL, EchoPinL , 30);
+NewPing usensorR(TriggerPinR, EchoPinR , 30);
+NewPing usensormR(TriggerPinMr, EchoPinMr , 30);
+NewPing usensormL(TriggerPinMl, EchoPinMl , 30);
 
-const int EchoPin2 = 11;
-const int TriggerPin2 = 10;
-
-NewPing sonar(TriggerPin, EchoPin , 40);
-NewPing sonar2(TriggerPin2, EchoPin2 , 40);
-
+int us_left;
+int us_middleL;
+int us_center;
+int us_right;
+int us_middleR;
 
 void setup() {
   Serial.begin(115200); 
@@ -41,44 +43,27 @@ void loop() {
   if (( currentMillis - previousMillis) >= interval)
   {
     previousMillis = currentMillis;
-    pid(contador,sp,enableA);
-    pid2(contador2,sp,enableB);
+    
+    if (flag_pid){
+      pid(contador,sp,enableA);
+      pid2(contador2,sp,enableB);
+    }
+    ;
     
     contador2 = 0;
     contador = 0;
-    if (sonar2.ping_cm() > 0 && sonar2.ping_cm() < 5){
-      digitalWrite(in1, HIGH);
-      digitalWrite(in2, LOW);
-      digitalWrite(in3, LOW);
-      digitalWrite(in4, HIGH);
-      turning_r = true;
-      
-    }
-    if (turning_r){
-      if (sonar.ping_cm() > 0 && sonar.ping_cm() < 7){
-      digitalWrite(in1, HIGH);
-      digitalWrite(in2, LOW);
-      digitalWrite(in3, HIGH);
-      digitalWrite(in4, LOW);
-      turning_r = false;
-      } 
-    }
+    
   }
   
   if (( currentMillis - previousMillis2) >= interval2)
   {
-  
-    previousMillis2 = currentMillis;
-    print_rpms(sp);
-    Serial.print("Sensor 1: ");
-    Serial.print(sonar.ping_cm()); // obtener el valor en cm (0 = fuera de rango)
-    Serial.print("cm ");
-    Serial.print("  Sensor 2: ");
-    Serial.print(sonar2.ping_cm()); // obtener el valor en cm (0 = fuera de rango)
-    Serial.println("cm ");
-
     
+    previousMillis2 = currentMillis;
+    
+    
+    print_rpms(sp);
   }
+  
 }
 
 
@@ -89,4 +74,17 @@ void interrupcion() {
 
 void interrupcion2() {
   contador2 ++;
+}
+
+int get_cms(NewPing sonar){
+  unsigned long pingTimer;
+  int cm;
+  pingTimer = sonar.ping_median(5);
+  cm = sonar.convert_cm(pingTimer);
+  return cm;
+}
+
+void us_distances(){
+  us_left = get_cms(usensorL);
+  
 }

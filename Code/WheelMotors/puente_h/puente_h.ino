@@ -13,8 +13,8 @@ void setup() {
   pinMode(in2, OUTPUT);
   pinMode(in3, OUTPUT);
   pinMode(in4, OUTPUT);
-  analogWrite(enableA, 255);
-  analogWrite(enableB, 255);
+  analogWrite(enableA, 170);
+  analogWrite(enableB, 130);
 }
  
 void loop() {

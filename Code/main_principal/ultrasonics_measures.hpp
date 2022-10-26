@@ -1,5 +1,3 @@
-
-
 #include <NewPing.h>
 
 const int EchoPinC = 53;
@@ -31,38 +29,6 @@ int us_center;
 int us_right;
 int us_middleR;
 
-
-
-unsigned long previousMillis = 0;
-
-void setup() {
-  Serial.begin(115200);
-}
-
-void loop() {
-  int x;
-  unsigned long currentMillis = millis();
-  if (( currentMillis - previousMillis) >= 1000)
-  {
-    us_distances();
-    Serial.print(us_left); // Send ping, get distance in cm and print result (0 = outside set distance range)
-    Serial.print("cm");
-    Serial.print(" Mid Left: ");
-    Serial.print(us_middleL);
-    Serial.print("cm");
-    Serial.print(" Center: ");
-    Serial.print(us_center);
-    Serial.print("cm");
-    Serial.print(" Mid Right: ");
-    Serial.print(us_middleR);
-    Serial.print("cm");
-    Serial.print(" Right: ");
-    Serial.print(us_right);
-    Serial.println("cm");
-    
-    
-  }
-}
 
 int get_cms(NewPing sonar){
   unsigned long pingTimer;
