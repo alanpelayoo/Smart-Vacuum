@@ -1,12 +1,11 @@
-int enableA = 4;
-int in1 = 51;
-int in2 = 50;
+#include "mesf_princ.hpp"
 
-int enableB = 5;
-int in3 = 49;
-int in4 = 48;
+
+
 
 void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(115200); 
   pinMode(enableA, OUTPUT);
   pinMode(enableB, OUTPUT);
   pinMode(in1, OUTPUT);
@@ -16,12 +15,15 @@ void setup() {
   analogWrite(enableA, 170);
   analogWrite(enableB, 130);
 }
- 
+
 void loop() {
-  digitalWrite(in1, HIGH);
-  digitalWrite(in2, LOW);
+  delay(1000);
+  Serial.print("Starting State Machine");
+  mefRAinit();
   
-  digitalWrite(in3, HIGH);
-  digitalWrite(in4, LOW);
-  
+  while(1){
+    
+    mefRAupdate();
+  }
+
 }
