@@ -20,27 +20,31 @@ void mefRAinit(void)
 }
 
 
-void mefRAupdate(unsigned long currentMillis)
+void mefRAupdate()
 {
+  unsigned long currentMillis = millis();
+  
   switch(ra_State){
   
   case init_:
     move_forward();
-    us_center = get_cms(usensorC);
-    
-    Serial.print(" Center: ");
-    Serial.print(us_center);
-    Serial.println("cm");
-  
+    if (( currentMillis - previousMillis) >= 1000)
+    {
+      us_center = get_cms(usensorC);
+      
+      Serial.print(" Center: ");
+      Serial.print(us_center);
+      Serial.println("cm");
+      previousMillis = currentMillis;
+    }
     if ( (us_center <=11) && (us_center > 1) ){
       ra_State =stop_;
       
     }
-    delay(100);
+    
     break;
     
   case stop_:
- 
     move_stop();
     
     break;

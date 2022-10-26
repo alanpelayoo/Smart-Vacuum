@@ -22,8 +22,8 @@ void loop() {
   mefRAinit();
   
   while(1){
-    unsigned long currentMillis = millis();
-    mefRAupdate(currentMillis);
+    
+    mefRAupdate();
   }
 
 }
