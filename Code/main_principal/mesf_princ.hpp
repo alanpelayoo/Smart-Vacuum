@@ -8,10 +8,14 @@ unsigned long previousMillis = 0;
 typedef enum{
   init_,
   stop_,
+  turn_r,
+  turn_l,
 
 }raMEF_t;
 
 raMEF_t ra_State;
+
+int counter = 0;
 
 void mefRAinit(void)
 {
@@ -28,16 +32,13 @@ void mefRAupdate()
   
   case init_:
     move_forward();
-    if (( currentMillis - previousMillis) >= 1000)
+    if (( currentMillis - previousMillis) >= 50)
     {
       us_center = get_cms(usensorC);
-      
-      Serial.print(" Center: ");
-      Serial.print(us_center);
-      Serial.println("cm");
+      us_middleL = get_cms(usensormL);
       previousMillis = currentMillis;
     }
-    if ( (us_center <=11) && (us_center > 1) ){
+    if ( ( (us_center <=10) && (us_center > 0 )) || ((us_middleL <=10) && (us_middleL > 0 )) ){
       ra_State =stop_;
       
     }
@@ -45,8 +46,39 @@ void mefRAupdate()
     break;
     
   case stop_:
+    Serial.println(counter);
     move_stop();
-    
+    if (( currentMillis - previousMillis) >= 50)
+    {
+      us_right = get_cms(usensorR);
+      previousMillis = currentMillis;
+      counter ++;
+    }
+
+    if ( (us_right <=10) && (us_right > 0) ){
+      ra_State = turn_l;
+      counter=0;
+    }else if (counter > 10){
+      ra_State = turn_r;
+      counter=0;
+    }
+    break;
+
+  case turn_l:
+      turn_left();
+    break;
+
+  case turn_r:
+      turn_right();
+      if (( currentMillis - previousMillis) >= 50)
+      {
+        us_left = get_cms(usensorL);
+        us_center = get_cms(usensorC);
+        previousMillis = currentMillis;
+      }
+      if ( (us_left <=10) && (us_left > 0) && (us_center == 0 || us_center > 9 ) ){
+        ra_State = init_;
+      }
     break;
     
   
