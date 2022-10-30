@@ -14,6 +14,9 @@ void setup() {
   pinMode(in4, OUTPUT);
   analogWrite(enableA, 170);
   analogWrite(enableB, 130);
+
+  //for random number library
+  randomSeed(analogRead(0));
 }
 
 void loop() {

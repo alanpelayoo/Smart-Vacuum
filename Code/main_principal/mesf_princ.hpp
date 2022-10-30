@@ -38,7 +38,7 @@ void mefRAupdate()
     us_middleR = get_cms(usensormR,2);
     
     
-    if ( (us_center <=14) && (us_center > 0) ){
+    if ( (us_center <=15) && (us_center > 0) ){
       ra_State =stop_;
       break;
     
@@ -54,16 +54,31 @@ void mefRAupdate()
     break;
     
   case stop_:
-    
     move_stop();
+    int randNumber;
     
-    us_right = get_cms(usensorR,7);
     
-    if ( (us_right <=14) && (us_right > 0) ){
+    us_right = get_cms(usensorR,5);
+    us_left = get_cms(usensorL,5);
+    
+    if ( (us_right <=15) && (us_right > 0) ){
       ra_State = turn_l;
       break;
-    }else{
+      
+    }else if ((us_left <=15) && (us_left > 0)){
       ra_State = turn_r;
+      break;
+    }
+    else{
+      //Generating random number, so we change routes, and clean different areas
+      randNumber = random(2);
+      if (randNumber == 1){
+        ra_State = turn_r;
+      }
+      else {
+        ra_State = turn_l;
+      }
+      delay(50);
       break;
     }
     
