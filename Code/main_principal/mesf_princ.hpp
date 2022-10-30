@@ -26,6 +26,7 @@ void mefRAinit(void)
 
 void mefRAupdate()
 {
+  
   unsigned long currentMillis = millis();
   
   switch(ra_State){
@@ -36,17 +37,25 @@ void mefRAupdate()
     {
       us_center = get_cms(usensorC);
       us_middleL = get_cms(usensormL);
+      us_middleR = get_cms(usensormR);
       previousMillis = currentMillis;
     }
-    if ( ( (us_center <=10) && (us_center > 0 )) || ((us_middleL <=10) && (us_middleL > 0 )) ){
+    if ( (us_center <=10) && (us_center > 0) ){
       ra_State =stop_;
+      break;
       
+    }else if ( (us_middleL <=10) && (us_middleL > 0) ){
+      ra_State =turn_r;
+      break;
+    }else if ( (us_middleR <=10) && (us_middleR > 0) ){
+      ra_State =turn_l;
+      break;
     }
     
     break;
     
   case stop_:
-    Serial.println(counter);
+    
     move_stop();
     if (( currentMillis - previousMillis) >= 50)
     {
@@ -58,7 +67,7 @@ void mefRAupdate()
     if ( (us_right <=10) && (us_right > 0) ){
       ra_State = turn_l;
       counter=0;
-    }else if (counter > 10){
+    }else if (counter > 5){
       ra_State = turn_r;
       counter=0;
     }
@@ -66,6 +75,15 @@ void mefRAupdate()
 
   case turn_l:
       turn_left();
+      if (( currentMillis - previousMillis) >= 50)
+      {
+        us_right = get_cms(usensorR);
+        us_center = get_cms(usensorC);
+        previousMillis = currentMillis;
+      }
+      if ( (us_right <=10) && (us_right > 0) && (us_center == 0 || us_center > 9 ) ){
+        ra_State = init_;
+      }
     break;
 
   case turn_r:

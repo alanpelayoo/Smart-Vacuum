@@ -33,7 +33,7 @@ int us_middleR;
 int get_cms(NewPing sonar){
   unsigned long pingTimer;
   int cm;
-  pingTimer = sonar.ping_median(3);
+  pingTimer = sonar.ping_median(2);
   cm = sonar.convert_cm(pingTimer);
   return cm;
 }
