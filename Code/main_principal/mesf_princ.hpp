@@ -58,9 +58,9 @@ void mefRAupdate()
     int randNumber;
     
     
-    us_right = get_cms(usensorR,5);
-    us_left = get_cms(usensorL,5);
-    
+    us_right = get_cms(usensorR,3);
+    us_left = get_cms(usensorL,3);
+    delay(30);
     if ( (us_right <=15) && (us_right > 0) ){
       ra_State = turn_l;
       break;
@@ -78,9 +78,10 @@ void mefRAupdate()
       else {
         ra_State = turn_l;
       }
-      delay(50);
+      
       break;
     }
+    break;
     
     delay(50);
     break;
