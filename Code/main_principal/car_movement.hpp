@@ -8,8 +8,8 @@ int in4 = 48;
 
 
 void move_forward(){
-  analogWrite(enableA, 170);
-  analogWrite(enableB, 130);
+  analogWrite(enableA, 180);
+  analogWrite(enableB, 120);
   digitalWrite(in1, HIGH);
   digitalWrite(in2, LOW);
   digitalWrite(in3, HIGH);
