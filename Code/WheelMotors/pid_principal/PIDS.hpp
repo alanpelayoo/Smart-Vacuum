@@ -62,4 +62,9 @@ void print_rpms(float sp){
   Serial.print(pv);
   Serial.print(", PV2: ");
   Serial.println(pv_2);
+  Serial.print("CV1: ");
+  Serial.print(cv*(255.0/500.0));
+  Serial.print("CV2: ");
+  Serial.println(cv_2*(255.0/500.0));
+  
 }

@@ -38,7 +38,7 @@ void mefRAupdate()
     us_middleR = get_cms(usensormR,2);
     
     
-    if ( (us_center <=15) && (us_center > 0) ){
+    if ( (us_center <=14) && (us_center > 0) ){
       ra_State =stop_;
       break;
     
@@ -94,7 +94,7 @@ void mefRAupdate()
       us_middleR = get_cms(usensormR,2);
 
       //10
-      if ( (us_right <=12) && (us_right > 0) && (us_center == 0 || us_center > 9 ) && (us_middleR == 0 || us_middleR > 7 ) ){
+      if ( (us_right <=12) && (us_right > 0) && (us_center == 0 || us_center > 11 ) && (us_middleR == 0 || us_middleR > 7 ) ){
         ra_State = init_;
         break;
       }
@@ -108,7 +108,7 @@ void mefRAupdate()
     us_center = get_cms(usensorC,2);
     us_middleL = get_cms(usensormL,2);
    
-    if ( (us_left <=12) && (us_left > 0) && (us_center == 0 || us_center > 9 ) && (us_middleL == 0 || us_middleL > 7 ) ){
+    if ( (us_left <=12) && (us_left > 0) && (us_center == 0 || us_center > 11 ) && (us_middleL == 0 || us_middleL > 7 ) ){
       ra_State = init_;
       break;
     }
