@@ -42,7 +42,7 @@ void setup() {
 void loop() {
   int x;
   unsigned long currentMillis = millis();
-  if (( currentMillis - previousMillis) >= 1000)
+  if (( currentMillis - previousMillis) >= 50)
   {
     us_distances();
     Serial.print(us_left); // Send ping, get distance in cm and print result (0 = outside set distance range)

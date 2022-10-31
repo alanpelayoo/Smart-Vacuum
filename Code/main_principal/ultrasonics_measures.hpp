@@ -17,7 +17,7 @@ const int TriggerPinMl = 40;
 
 
 
-NewPing usensorC(TriggerPinC, EchoPinC , 30);
+NewPing usensorC(TriggerPinC, EchoPinC , 70);
 NewPing usensorL(TriggerPinL, EchoPinL , 30);
 NewPing usensorR(TriggerPinR, EchoPinR , 30);
 NewPing usensormR(TriggerPinMr, EchoPinMr , 30);
@@ -30,18 +30,18 @@ int us_right;
 int us_middleR;
 
 
-int get_cms(NewPing sonar){
+int get_cms(NewPing sonar, int median){
   unsigned long pingTimer;
   int cm;
-  pingTimer = sonar.ping_median(5);
+  pingTimer = sonar.ping_median(median);
   cm = sonar.convert_cm(pingTimer);
   return cm;
 }
 
 void us_distances(){
-  us_left = get_cms(usensorL);
-  us_middleL = get_cms(usensormL);
-  us_center = get_cms(usensorC);
-  us_middleR = get_cms(usensormR);
-  us_right = get_cms(usensorR);
+  us_left = get_cms(usensorL,2);
+  us_middleL = get_cms(usensormL,2);
+  us_center = get_cms(usensorC,2);
+  us_middleR = get_cms(usensormR,2);
+  us_right = get_cms(usensorR,2);
 }
