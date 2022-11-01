@@ -12,9 +12,7 @@ void setup() {
   pinMode(in2, OUTPUT);
   pinMode(in3, OUTPUT);
   pinMode(in4, OUTPUT);
-  analogWrite(enableA, 60);
-  analogWrite(enableB, 60);
-
+  
   //for random number library
   randomSeed(analogRead(0));
 }

@@ -38,7 +38,7 @@ void mefRAupdate()
     us_middleR = get_cms(usensormR,2);
     
     
-    if ( (us_center <=14) && (us_center > 0) ){
+    if ( (us_center <=15) && (us_center > 0) ){
       ra_State =stop_;
       break;
     
