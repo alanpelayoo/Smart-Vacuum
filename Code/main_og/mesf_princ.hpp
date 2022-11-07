@@ -2,9 +2,7 @@
 #include "car_movement.hpp"
 #include "ultrasonics_measures.hpp"
 
-
-
-
+// States
 typedef enum{
   init_,
   stop_,
@@ -17,6 +15,7 @@ raMEF_t ra_State;
 
 int counter = 0;
 
+
 void mefRAinit(void)
 {
   ra_State=0;
@@ -26,9 +25,6 @@ void mefRAinit(void)
 
 void mefRAupdate()
 {
-  
-  
-  
   switch(ra_State){
   
   case init_:

@@ -6,7 +6,7 @@
 
 
 
-float sp= 120;
+float sp= 60;
 
 volatile int contador = 0;
          int contador2 = 0;
