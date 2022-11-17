@@ -13,7 +13,7 @@ int batteryPin = A15;
 char driverPin = 68;
 
 // Constants
-const batteryFull = 12.35;
+const float batteryFull = 12.35;
 
 // Function to read battery voltage  
 float readBattery(int batt_input)
