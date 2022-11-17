@@ -38,6 +38,8 @@ void setup() {
   pinMode(driverPin, OUTPUT);
   //for random number library
   randomSeed(analogRead(0));
+  // Initializes driverPin to LOW
+  digitalWrite(driverPin, LOW);
 }
 
 // Main loop
@@ -46,15 +48,17 @@ void loop() {
   Serial.print("Starting State Machine");
   mefRAinit();
   
-  // If battery voltage is above 12V, turns on the fan
-  if(readBattery(batteryPin)>12.0) digitalWrite(driverPin, HIGH);
-  
-  // Main inner loop
-  do {
+  // If battery voltage is above 12V, turns on the fan and initializes mefRAupdate
+  if(readBattery(batteryPin)>12.0)
+  {
+   digitalWrite(driverPin, HIGH)
+    // Main inner loop
+    do {
     mefRAupdate();
-  } while(readBattery(batteryPin)>11.1);
-  
+    } while(readBattery(batteryPin)>11.1);
+  } else
+  {
   // Turns off the fan if battery level gets too low
   digitalWrite(driverPin, LOW);
-
+  }
 }
