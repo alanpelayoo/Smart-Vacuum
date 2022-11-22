@@ -1,9 +1,11 @@
 
-#define ENCODER_A       2 // Amarillo
+#define ENCODER_A       3 // Amarillo
 #define ENCODER_B       4 // Verde
-#define enableA  3
+#define enableA  5
 
 float rpm =0;
+int in3 = 49;
+int in4 = 48;
 
 
 //Variable global de pulsos compartida con la interrupción
@@ -20,6 +22,10 @@ void setup(){
   pinMode(ENCODER_A, INPUT);
   pinMode(ENCODER_B, INPUT);
   pinMode(enableA, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);  
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
   //Configurar Interrupción
   timeold = 0;
   attachInterrupt(digitalPinToInterrupt(ENCODER_A),leerEncoder,RISING);

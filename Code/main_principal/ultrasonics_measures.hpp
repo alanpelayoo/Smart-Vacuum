@@ -6,8 +6,8 @@ const int TriggerPinC = 52;
 const int EchoPinL = 47;
 const int TriggerPinL = 46;
 
-const int EchoPinR = 45;
-const int TriggerPinR = 44;
+const int EchoPinR = 39;
+const int TriggerPinR = 38;
 
 const int EchoPinMr = 43;
 const int TriggerPinMr = 42;

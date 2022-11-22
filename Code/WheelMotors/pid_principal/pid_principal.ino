@@ -20,7 +20,7 @@ long interval2 = 500;
 void setup() {
   Serial.begin(115200); 
   configure_ports();
-  attachInterrupt(digitalPinToInterrupt(pinA),interrupcion,RISING);
+  //attachInterrupt(digitalPinToInterrupt(pinA),interrupcion,RISING);
   attachInterrupt(digitalPinToInterrupt(pinB),interrupcion2,RISING);
   
   
@@ -30,7 +30,7 @@ void loop() {
   if (( currentMillis - previousMillis) >= interval)
   {
     previousMillis = currentMillis;
-    pid(contador,sp,enableA);
+    //pid(contador,sp,enableA);
     pid2(contador2,sp,enableB);
     
     contador2 = 0;
