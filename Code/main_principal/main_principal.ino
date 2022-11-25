@@ -7,10 +7,10 @@
 #include "mesf_princ.hpp"
 
 // Input pins
-int batteryPin = A15;
+int batteryPin = A5;
 
 // Output pins
-char driverPin = 68;
+char driverPin = 30;
 
 // Constants
 const float batteryFull = 12.35;
@@ -21,7 +21,7 @@ float readBattery(int batt_input)
   int readInput;
   float batt_voltage;
   readInput = analogRead(batt_input);
-  batt_voltage = (((readInput*4.9)/1000)*voltageFull)/4.81;
+  batt_voltage = (((readInput*4.9)/1000)*batteryFull)/4.81;
   return batt_voltage;
 }
 
@@ -51,7 +51,7 @@ void loop() {
   // If battery voltage is above 12V, turns on the fan and initializes mefRAupdate
   if(readBattery(batteryPin)>12.0)
   {
-   digitalWrite(driverPin, HIGH)
+   digitalWrite(driverPin, HIGH);
     // Main inner loop
     do {
     mefRAupdate();
