@@ -8,8 +8,8 @@ int in4 = 48;
 
 
 void move_forward(){
-  analogWrite(enableA, 175);
-  analogWrite(enableB, 128);
+  analogWrite(enableA, 186);
+  analogWrite(enableB, 132);
   digitalWrite(in1, HIGH);
   digitalWrite(in2, LOW);
   digitalWrite(in3, HIGH);
@@ -25,8 +25,8 @@ void move_stop(){
 
 void turn_right(){
   //og values
-  analogWrite(enableA, 120);
-  analogWrite(enableB, 95);
+  analogWrite(enableA, 130);
+  analogWrite(enableB, 97);
   digitalWrite(in1, HIGH);
   digitalWrite(in2, LOW);
   digitalWrite(in3, LOW);
@@ -34,8 +34,8 @@ void turn_right(){
 }
 
 void turn_left(){
-  analogWrite(enableA, 120);
-  analogWrite(enableB, 95);
+  analogWrite(enableA, 130);
+  analogWrite(enableB, 97);
   digitalWrite(in1, LOW);
   digitalWrite(in2, HIGH);
   digitalWrite(in3, HIGH);
