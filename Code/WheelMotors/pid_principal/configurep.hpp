@@ -19,7 +19,7 @@ void configure_ports(){
   pinMode(in3, OUTPUT);
   pinMode(in4, OUTPUT);
 
-  analogWrite(enableA, 255);
+  analogWrite(enableA, 0);
   digitalWrite(in1, HIGH);
   digitalWrite(in2, LOW);
   analogWrite(enableB, 255);
